@@ -46,10 +46,12 @@
                         VerticalAlignment="Bottom"
                         Margin="8,0,0,0"
                         Focusable="False"
-                        Command="{Binding SelectFileCommand, Mode=OneWay}">
+                        Command="{Binding SelectFileCommand, Mode=OneWay}"
+                        ToolTip="参照">
                     <materialDesign:PackIcon Kind="Folder"
                                              Width="16"
-                                             Height="16" />
+                                             Height="16"
+                                             Style="{DynamicResource FolderOpen}" />
                 </Button>
             </StackPanel>
             <PasswordBox Grid.Row="1"

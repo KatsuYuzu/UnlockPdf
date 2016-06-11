@@ -1,6 +1,7 @@
-﻿<Application x:Class="UnlockPdf.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             x:Class="UnlockPdf.App"
              StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -56,6 +57,28 @@
             <SolidColorBrush x:Key="IdealForegroundDisabledBrush"
                              Color="{DynamicResource Primary500}"
                              Opacity="0.4" />
+
+            <Style x:Key="FolderOpen"
+                   TargetType="{x:Type materialDesign:PackIcon}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type materialDesign:PackIcon}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}">
+                                <Viewbox FlowDirection="{TemplateBinding FlowDirection}">
+                                    <Canvas Height="24"
+                                            Width="24">
+                                        <Path Data="M0 0h24v24H0z" />
+                                        <Path Fill="{TemplateBinding Foreground}"
+                                              Data="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>
