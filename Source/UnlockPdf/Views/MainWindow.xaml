@@ -24,8 +24,8 @@
     </metro:MetroWindow.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="99*" />
-            <RowDefinition Height="41*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Margin="8">
             <Grid.RowDefinitions>
@@ -69,8 +69,7 @@
         </Grid>
         <StatusBar Grid.Row="1">
             <StatusBarItem Content="{Binding Status.Value}"
-                           Margin="4" />
+                           Margin="5,4,5,5" />
         </StatusBar>
     </Grid>
-
 </metro:MetroWindow>
