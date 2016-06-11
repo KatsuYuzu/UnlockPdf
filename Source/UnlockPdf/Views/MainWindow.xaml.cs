@@ -19,7 +19,6 @@ namespace UnlockPdf.Views
                     this.Close();
                 }
             };
-
         }
     }
 }

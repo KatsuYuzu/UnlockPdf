@@ -1,19 +1,17 @@
-﻿using Microsoft.Win32;
+﻿using iTextSharp.text.exceptions;
+using Microsoft.Win32;
 using Reactive.Bindings;
-using Reactive.Bindings.Extensions;
 using System;
 using System.IO;
-using System.Linq;
 using System.Reactive.Linq;
-using System.Reactive;
-using System.Threading.Tasks;
-using iTextSharp.text.exceptions;
 
 namespace UnlockPdf.ViewModels
 {
     class MainWindowViewModel
     {
-
+        /// <summary>
+        /// 新しいインスタンスを初期化します。
+        /// </summary>
         public MainWindowViewModel()
         {
             // set
@@ -21,17 +19,15 @@ namespace UnlockPdf.ViewModels
             PdfPath = new ReactiveProperty<string>();
             Password = new ReactiveProperty<string>();
 
-            FileExists = PdfPath
-                .Select(x => File.Exists(x))
-                .ToReactiveProperty();
+            var isExistsPdf = PdfPath
+                     .Select(x => File.Exists(x));
 
-            HasPassword = Password
-                .Select(x => !string.IsNullOrWhiteSpace(x))
-                .ToReactiveProperty();
+            var hasPassword = Password
+                 .Select(x => !string.IsNullOrWhiteSpace(x));
 
             Status = Observable.CombineLatest(
-                    FileExists,
-                    HasPassword,
+                    isExistsPdf,
+                    hasPassword,
                     (x, y) => !x
                         ? "PDF ファイルを選択してください"
                         : !y
@@ -42,8 +38,8 @@ namespace UnlockPdf.ViewModels
             SelectFileCommand = new ReactiveCommand();
 
             UnlockCommand = Observable.CombineLatest(
-                    FileExists,
-                    HasPassword,
+                    isExistsPdf,
+                    hasPassword,
                     (x, y) => x && y)
                 .ToReactiveCommand();
 
@@ -96,9 +92,6 @@ namespace UnlockPdf.ViewModels
 
         public ReactiveProperty<string> PdfPath { get; private set; }
         public ReactiveProperty<string> Password { get; private set; }
-
-        public ReactiveProperty<bool> FileExists { get; private set; }
-        public ReactiveProperty<bool> HasPassword { get; private set; }
 
         public ReactiveProperty<string> Status { get; private set; }
 
