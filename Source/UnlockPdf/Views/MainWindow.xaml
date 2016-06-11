@@ -1,0 +1,76 @@
+﻿<metro:MetroWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                   xmlns:livet="http://schemas.livet-mvvm.net/2011/wpf"
+                   xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+                   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                   xmlns:ViewModels="clr-namespace:UnlockPdf.ViewModels"
+                   x:Class="UnlockPdf.Views.MainWindow"
+                   TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                   Background="{DynamicResource MaterialDesignPaper}"
+                   TextElement.FontWeight="Medium"
+                   TextElement.FontSize="16"
+                   FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+                   GlowBrush="{DynamicResource AccentColorBrush}"
+                   BorderThickness="1"
+                   Title="Unlock PDF"
+                   ShowMinButton="False"
+                   ShowMaxRestoreButton="False"
+                   SizeToContent="WidthAndHeight"
+                   ResizeMode="NoResize"
+                   WindowStartupLocation="CenterScreen">
+    <metro:MetroWindow.DataContext>
+        <ViewModels:MainWindowViewModel />
+    </metro:MetroWindow.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="99*" />
+            <RowDefinition Height="41*" />
+        </Grid.RowDefinitions>
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="8,8,8,0"
+                        Orientation="Horizontal">
+                <TextBox Width="400"
+                         HorizontalAlignment="Left"
+                         materialDesign:TextFieldAssist.Hint="PDF PATH"
+                         Text="{Binding PdfPath.Value, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Width="32"
+                        Height="32"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="8,0,0,0"
+                        Focusable="False"
+                        Command="{Binding SelectFileCommand, Mode=OneWay}">
+                    <materialDesign:PackIcon Kind="Folder"
+                                             Width="16"
+                                             Height="16" />
+                </Button>
+            </StackPanel>
+            <PasswordBox Grid.Row="1"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         Margin="8,8,0,0"
+                         materialDesign:TextFieldAssist.Hint="PASSWORD">
+                <i:Interaction.Behaviors>
+                    <livet:PasswordBoxBindingSupportBehavior Password="{Binding Password.Value}" />
+                </i:Interaction.Behaviors>
+            </PasswordBox>
+            <Button Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    Margin="0,8,8,8"
+                    Content="UNLOCK"
+                    Command="{Binding UnlockCommand, Mode=OneWay}" />
+        </Grid>
+        <StatusBar Grid.Row="1">
+            <StatusBarItem Content="{Binding Status.Value}"
+                           Margin="4" />
+        </StatusBar>
+    </Grid>
+
+</metro:MetroWindow>
