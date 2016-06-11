@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\UnlockPdf\Properties\AssemblyInfo.shared.cs">
+      <Link>Properties\AssemblyInfo.shared.cs</Link>
+    </Compile>
     <Compile Include="PathHelper.cs" />
     <Compile Include="PdfUnlocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
