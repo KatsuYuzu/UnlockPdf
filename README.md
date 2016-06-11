@@ -15,4 +15,4 @@ ver 1.0.0 - 2016-06-11
 
 License
 -------
-under [MIT License](http://opensource.org/licenses/MIT)
+under [MIT License](LICENSE)
