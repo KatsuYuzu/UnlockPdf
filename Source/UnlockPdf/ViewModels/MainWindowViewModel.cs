@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
+using iTextSharp.text.exceptions;
 
 namespace UnlockPdf.ViewModels
 {
@@ -70,8 +71,20 @@ namespace UnlockPdf.ViewModels
                             PathHelper.CreateUniquePath(
                                 Path.GetDirectoryName(PdfPath.Value),
                                 Path.ChangeExtension(PdfPath.Value, null) + "_unlocked.pdf");
-                        PdfUnlocker.Unlock(PdfPath.Value, destinationPath, Password.Value);
-                        Status.Value = "PDF ファイルのパスワードを解除しました";
+                        try
+                        {
+                            PdfUnlocker.Unlock(PdfPath.Value, destinationPath, Password.Value);
+                            Status.Value = "PDF ファイルのパスワードを解除しました";
+                        }
+                        catch (BadPasswordException)
+                        {
+                            Password.Value = null;
+                            Status.Value = "正しいパスワードを入力してください";
+                        }
+                        catch (InvalidPdfException)
+                        {
+                            Status.Value = "PDF ファイルが開けませんでした";
+                        }
                     }
                     else
                     {

@@ -7,6 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnlockPdf", "Source\UnlockP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnlockPdf.Core", "Source\UnlockPdf.Core\UnlockPdf.Core.csproj", "{06BAD3EF-774A-40E9-9649-2FA0E378CBF9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{794838B8-8F39-4826-8A61-BD7A137AF510}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{F1DC85AE-8043-4994-B90C-4296A318A9C4}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\UnlockPdf.png = Assets\UnlockPdf.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +34,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F1DC85AE-8043-4994-B90C-4296A318A9C4} = {794838B8-8F39-4826-8A61-BD7A137AF510}
 	EndGlobalSection
 EndGlobal
