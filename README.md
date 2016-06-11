@@ -7,8 +7,11 @@ UnlockPdf for Windows App.
 
 History
 -------
+ver 1.0.1 - 2016-06-11
+* Fixed error
+
 ver 1.0.0 - 2016-06-11
-* release
+* Release
 
 License
 -------
