@@ -23,6 +23,11 @@
     <metro:MetroWindow.DataContext>
         <ViewModels:MainWindowViewModel />
     </metro:MetroWindow.DataContext>
+    <i:Interaction.Triggers>
+        <ei:KeyTrigger Key="Enter">
+            <i:InvokeCommandAction Command="{Binding UnlockCommand, Mode=OneWay}"></i:InvokeCommandAction>
+        </ei:KeyTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -63,12 +68,6 @@
                 <i:Interaction.Behaviors>
                     <livet:PasswordBoxBindingSupportBehavior Password="{Binding Password.Value}" />
                 </i:Interaction.Behaviors>
-                <i:Interaction.Triggers>
-                    <ei:KeyTrigger Key="Enter"
-                                   ActiveOnFocus="True">
-                        <i:InvokeCommandAction Command="{Binding UnlockCommand, Mode=OneWay}"></i:InvokeCommandAction>
-                    </ei:KeyTrigger>
-                </i:Interaction.Triggers>
             </PasswordBox>
             <Button Grid.Row="2"
                     HorizontalAlignment="Right"
