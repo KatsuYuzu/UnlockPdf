@@ -70,7 +70,9 @@ namespace UnlockPdf.ViewModels
                         try
                         {
                             PdfUnlocker.Unlock(PdfPath.Value, destinationPath, Password.Value);
+                            Password.Value = null;
                             Status.Value = "PDF ファイルのパスワードを解除しました";
+                            PathHelper.OpenExplorerWithSelected(destinationPath);
                         }
                         catch (BadPasswordException)
                         {

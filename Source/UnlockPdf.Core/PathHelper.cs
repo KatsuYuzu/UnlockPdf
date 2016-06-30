@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 
 namespace UnlockPdf
 {
@@ -33,6 +35,15 @@ namespace UnlockPdf
             return File.Exists(result)
                 ? CreateUniquePath(directoryPath, fileName, uniqueNumber + 1)
                 : result;
+        }
+
+        /// <summary>
+        /// 選択された状態でエクスプローラーを開きます。
+        /// </summary>
+        /// <param name="path"></param>
+        public static void OpenExplorerWithSelected(string path)
+        {
+            using (Process.Start("explorer", String.Format(@"/select, ""{0}""", path))) { }
         }
     }
 }
