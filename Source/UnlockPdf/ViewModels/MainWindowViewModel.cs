@@ -32,7 +32,7 @@ namespace UnlockPdf.ViewModels
                         ? "PDF ファイルを選択してください"
                         : !y
                             ? "パスワードを入力してください"
-                            : "")
+                            : "[ENTER] キーまたは [UNLOCK] ボタンを押してください")
                 .ToReactiveProperty();
 
             SelectFileCommand = new ReactiveCommand();
