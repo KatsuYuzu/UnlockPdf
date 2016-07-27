@@ -7,6 +7,11 @@ UnlockPdf for Windows App.
 
 History
 -------
+ver 1.1.0 - 2016-07-28
+* Added shortcut key of unlock
+* Added open the explorer
+* Fixed path check
+
 ver 1.0.2 - 2016-06-11
 * Changed .NET 4.5.2 to 4.5
 * Fixed design
