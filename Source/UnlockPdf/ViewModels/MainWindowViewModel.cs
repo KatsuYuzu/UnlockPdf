@@ -20,7 +20,9 @@ namespace UnlockPdf.ViewModels
             Password = new ReactiveProperty<string>();
 
             var isExistsPdf = PdfPath
-                     .Select(x => File.Exists(x));
+                .Select(x => x ?? string.Empty)
+                .Select(x => x.Trim('"'))
+                .Select(x => File.Exists(x));
 
             var hasPassword = Password
                  .Select(x => !string.IsNullOrWhiteSpace(x));
@@ -61,15 +63,17 @@ namespace UnlockPdf.ViewModels
             UnlockCommand
                 .Subscribe(_ =>
                 {
-                    if (File.Exists(PdfPath.Value))
+                    var trimmedPdfPath = PdfPath.Value.Trim('"');
+
+                    if (File.Exists(trimmedPdfPath))
                     {
                         var destinationPath =
                             PathHelper.CreateUniquePath(
-                                Path.GetDirectoryName(PdfPath.Value),
-                                Path.ChangeExtension(PdfPath.Value, null) + "_unlocked.pdf");
+                                Path.GetDirectoryName(trimmedPdfPath),
+                                Path.ChangeExtension(trimmedPdfPath, null) + "_unlocked.pdf");
                         try
                         {
-                            PdfUnlocker.Unlock(PdfPath.Value, destinationPath, Password.Value);
+                            PdfUnlocker.Unlock(trimmedPdfPath, destinationPath, Password.Value);
                             Password.Value = null;
                             Status.Value = "PDF ファイルのパスワードを解除しました";
                             PathHelper.OpenExplorerWithSelected(destinationPath);
