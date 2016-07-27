@@ -25,7 +25,7 @@ namespace UnlockPdf.ViewModels
                 .Select(x => File.Exists(x));
 
             var hasPassword = Password
-                 .Select(x => !string.IsNullOrWhiteSpace(x));
+                .Select(x => !string.IsNullOrWhiteSpace(x));
 
             Status = Observable.CombineLatest(
                     isExistsPdf,
