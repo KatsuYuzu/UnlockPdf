@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore UnlockPdf.sln
+
+      - name: Build
+        run: dotnet build UnlockPdf.sln -c Release --no-restore
+
+      - name: Publish
+        shell: pwsh
+        run: |
+          $version = $env:GITHUB_REF_NAME.TrimStart('v')
+          if ($version -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$') {
+            throw "Tag '$env:GITHUB_REF_NAME' is not a supported version."
+          }
+          dotnet publish src/UnlockPdf/UnlockPdf.csproj `
+            -c Release `
+            -r win-x64 `
+            --self-contained true `
+            --no-restore `
+            -p:Version=$version `
+            -o artifacts/win-x64
+          Copy-Item `
+            artifacts/win-x64/UnlockPdf.exe `
+            "artifacts/UnlockPdf-win-x64-$env:GITHUB_REF_NAME.exe"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/UnlockPdf-win-x64-${{ github.ref_name }}.exe
+          generate_release_notes: true

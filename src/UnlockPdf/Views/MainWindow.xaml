@@ -1,0 +1,87 @@
+<mah:MetroWindow x:Class="UnlockPdf.Views.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                 xmlns:viewModels="clr-namespace:UnlockPdf.ViewModels"
+                 mc:Ignorable="d"
+                 Title="Unlock PDF"
+                 Width="560"
+                 SizeToContent="Height"
+                 ResizeMode="NoResize"
+                 ShowMaxRestoreButton="False"
+                 WindowStartupLocation="CenterScreen"
+                 Background="{DynamicResource MaterialDesignPaper}"
+                 TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                 TextElement.FontSize="16"
+                 TextElement.FontWeight="Medium"
+                 WindowTitleBrush="{StaticResource AppAccentBrush}"
+                 NonActiveWindowTitleBrush="{StaticResource AppAccentHoverBrush}"
+                 BorderBrush="{StaticResource AppAccentBrush}"
+                 GlowBrush="{StaticResource AppAccentBrush}"
+                 BorderThickness="1">
+    <mah:MetroWindow.DataContext>
+        <viewModels:MainWindowViewModel />
+    </mah:MetroWindow.DataContext>
+    <mah:MetroWindow.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding UnlockCommand}" />
+    </mah:MetroWindow.InputBindings>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom"
+                   Background="{StaticResource AppAccentBrush}"
+                   Foreground="White">
+            <StatusBarItem Content="{Binding Status}"
+                           Margin="5,4,5,5" />
+        </StatusBar>
+        <Grid Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Row="0">
+                <Button DockPanel.Dock="Right"
+                        Width="36"
+                        Height="36"
+                        Margin="8,0,0,0"
+                        Padding="0"
+                        Background="{StaticResource AppAccentBrush}"
+                        Foreground="White"
+                        Cursor="Hand"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                        Command="{Binding SelectFileCommand}"
+                        ToolTip="参照">
+                    <materialDesign:PackIcon Kind="Folder"
+                                             Width="18"
+                                             Height="18" />
+                </Button>
+                <TextBox MinWidth="430"
+                         materialDesign:HintAssist.Hint="PDF PATH"
+                         Text="{Binding PdfPath, UpdateSourceTrigger=PropertyChanged}" />
+            </DockPanel>
+
+            <PasswordBox x:Name="PasswordBox"
+                         Grid.Row="1"
+                         Width="220"
+                         Margin="0,14,0,0"
+                         HorizontalAlignment="Left"
+                         materialDesign:HintAssist.Hint="PASSWORD"
+                         PasswordChanged="PasswordBox_OnPasswordChanged" />
+
+            <Button Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    Margin="0,14,0,0"
+                    MinWidth="110"
+                    Background="{StaticResource AppAccentBrush}"
+                    Foreground="White"
+                    BorderBrush="{StaticResource AppAccentBrush}"
+                    Cursor="Hand"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Content="UNLOCK"
+                    Command="{Binding UnlockCommand}" />
+        </Grid>
+    </DockPanel>
+</mah:MetroWindow>
