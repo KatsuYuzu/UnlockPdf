@@ -46,7 +46,7 @@ jobs:
             "artifacts/UnlockPdf-win-x64-$env:GITHUB_REF_NAME.exe"
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: artifacts/UnlockPdf-win-x64-${{ github.ref_name }}.exe
           generate_release_notes: true
